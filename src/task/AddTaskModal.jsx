@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 
-export default function AddTaskModal({ onSave, updateToTask }) {
+export default function AddTaskModal({ onSave, updateToTask, onCloseClick }) {
   const [task, setTask] = useState(
     updateToTask || {
       id: crypto.randomUUID(),
@@ -27,7 +27,7 @@ export default function AddTaskModal({ onSave, updateToTask }) {
   return (
     <>
       <div className="bg-black opacity-70 absolute h-full w-full z-10 top-0 left-0"></div>
-      <htmlForm className="mx-auto my-10 w-full max-w-[640px] max-h-[640px] rounded-xl border border-[#FEFBFB]/[36%] bg-[#191D26] p-9 max-md:px-4 lg:my-20 lg:p-11 absolute z-10 top-1/3 left-1/4">
+      <htmlForm className="mx-auto my-10 w-full max-w-[640px] max-h-[720px] rounded-xl border border-[#FEFBFB]/[36%] bg-[#191D26] p-9 max-md:px-4 lg:my-20 lg:p-11 absolute z-10 top-1/3 left-1/4">
         <h2 className="mb-9 text-center text-2xl font-bold text-white lg:mb-11 lg:text-[28px]">
           {isAdd ? " Add New Task" : "Edit Task"}
         </h2>
@@ -40,7 +40,7 @@ export default function AddTaskModal({ onSave, updateToTask }) {
               type="text"
               name="title"
               id="title"
-              value={task.name}
+              value={task.title}
               onChange={handleChange}
               required
             />
@@ -52,7 +52,7 @@ export default function AddTaskModal({ onSave, updateToTask }) {
               type="text"
               name="description"
               id="description"
-              value={task.name}
+              value={task.description}
               onChange={handleChange}
               required
             ></textarea>
@@ -65,7 +65,7 @@ export default function AddTaskModal({ onSave, updateToTask }) {
                 type="text"
                 name="tags"
                 id="tags"
-                value={task.name}
+                value={task.tags}
                 onChange={handleChange}
                 required
               />
@@ -77,7 +77,7 @@ export default function AddTaskModal({ onSave, updateToTask }) {
                 className="block w-full cursor-pointer rounded-md bg-[#2D323F] px-3 py-2.5"
                 name="priority"
                 id="priority"
-                value={task.name}
+                value={task.priority}
                 onChange={handleChange}
                 required
               >
@@ -90,7 +90,14 @@ export default function AddTaskModal({ onSave, updateToTask }) {
           </div>
         </div>
 
-        <div className="mt-16 flex justify-center lg:mt-20">
+        <div className="mt-16 flex justify-between lg:mt-20">
+          <button
+            type="submit"
+            className="rounded bg-red-600 px-4 py-2 text-white transition-all hover:opacity-80"
+            onClick={onCloseClick}
+          >
+            Close
+          </button>
           <button
             type="submit"
             className="rounded bg-blue-600 px-4 py-2 text-white transition-all hover:opacity-80"
